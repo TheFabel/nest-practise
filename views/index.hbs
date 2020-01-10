@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="socket.io.js"></script>
+
+    <meta charset="utf-8" />
+    <title>App</title>
+    <script>
+        const socket = io('http://localhost:3000');
+        socket.on('connect', function() {
+            console.log('Connected');
+            socket.emit('init', { test: 'test' });
+        });
+        socket.on('users', function(data) {
+            console.log('users', data);
+        });
+        socket.on('init', function(data) {
+            console.log('init', data);
+        });
+    </script>
+</head>
+<body>
+{{ message }}
+</body>
+</html>
