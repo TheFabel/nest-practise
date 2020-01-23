@@ -29,9 +29,10 @@ export class PokemonController {
     }
 
     @Put(':uuid')
-    async update(@Param('uuid') uuid: number, @Body() pokemonDto: PokemonDto): Promise<PokemonEntity | {error: boolean, message: string}> {
-        const pokemon = await this.pokemonRepository.findOnePokemon(uuid);
+    async update(@Param('uuid') uuid: number, @Body() pokemonDto: PokemonDto): Promise<PokemonEntity | { error: boolean, message: string }> {
+
         try {
+            const pokemon = await this.pokemonRepository.findOnePokemon(uuid);
             return await this.pokemonRepository.save({...pokemon, ...pokemonDto});
         } catch (e) {
             Logger.error('Error while updating pokemon', e.message);
